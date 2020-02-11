@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        //Creo función para ejecutar petición al servidor
+        function ejecutarAjax(){
+
+            //Creación conexion ajax al servidor XMLHttpRequest
+            var conexion;
+
+            //Compatibilidad versiones antiguas Internet Explorer
+            if(window.XMLHttpRequest){
+                conexion=new XMLHttpRequest();
+            }else{
+                conexion=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            //Onreadystatechange informa de cualquier cambio en el servidor
+            //CODIGOS DE UNA PETICIÓN AJAX
+            //readyState 0 - petición no se ha finalizado
+            //readyState 1 - conexión con servidor establecida
+            //readyState 2 - petición recibida
+            //readyState 3 - procesando petición
+            //readyState 4 - petición finalizada y respuesta lista
+
+            //status 200 - correcto
+            //status 404 - fallo
+            conexion.onreadystatechange=function(){
+                
+                //Si el Onreadystatechange esta preparado y el estado es correcto muestro contenido
+                if(conexion.readyState == 4 && conexion.status==200){
+                    document.getElementById("div_respuesta").innerHTML=conexion.responseText;
+                }
+            }
+
+            //Creación de petición get al servidor
+            //asincronica=true sincronica=false
+            conexion.open("GET", "fichero.txt" , true)
+
+            //Enviar la petición
+            conexion.send();
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <h1>Prueba ajax</h1>
+    <div id="div_respuesta"></div>
+    <!--Botón que ejecuta la función de petición-->
+    <button type="button" onclick="ejecutarAjax()">Ejecutar Petición</button>
+    
+</body>
+</html>
