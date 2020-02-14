@@ -1,11 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lectura fichero xml</title>
+
+    <script type="text/javascript">
+
+        function lanzarPeticion() {
+
+            var conexion;
+            
+            //Comprobar el tipo de navegador
+            if (window.XMLHttpRequest) {
+                conexion = new XMLHttpRequest();
+            } else {
+                conexion = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            //Comprobar el estado de la petición
+            conexion.onreadystatechange = function () {
+
+                //Si todo funciona leo el fichero
+                if (conexion.readyState == 4 && conexion.status == 200) {
+                    leerFichero(conexion);
+                }
+            };
+            
+            //Abrir conexión con el servidor solicitando el fichero xml
+            conexion.open('GET', 'music_collection.xml', true);
+            conexion.send();
+        }
+
+        //Función leer fichero xml   
+        function leerFichero(conexion){
+
+            var index;
+            var cadenaFinal = "<tr><th>Title</th><th>Artist</th><th>Country</th><th>Company</th><th>Price</th><th>Year</th></tr>";
+            var xmlDoc=conexion.responseXML; //Asigno repuesta a xmlDoc
+
+            //DEPURAR: Muestro la respuesta
+            //document.getElementById("respuesta").innerHTML='Repuesta servidor: ' + conexion.responseText;
+
+            //Asignar los elementos del XML a variables
+            var cd = xmlDoc.getElementsByTagName('CD');
+
+            //Leemos linea a linea el contenido del xml
+            //y lo formateamos en la tabla
+            for (index = 0; index < cd.length; index++) {
+                cadenaFinal += cd[index].firstChild + '</td><td>' + 
+                    cd[index].getElementsByTagName('TITLE')[0].childNodes[0].nodeValue + '</td><td>' + 
+                    cd[index].getElementsByTagName('ARTIST')[0].childNodes[0].nodeValue + '</td><td>' +
+                    cd[index].getElementsByTagName('COUNTRY')[0].childNodes[0].nodeValue +'</td><td>' + 
+                    cd[index].getElementsByTagName('COMPANY')[0].childNodes[0].nodeValue +'</td><td>' + 
+                    cd[index].getElementsByTagName('PRICE')[0].childNodes[0].nodeValue +'</td><td>' +
+                    cd[index].getElementsByTagName('YEAR')[0].childNodes[0].nodeValue +'<tr>';
+            }
+
+            //Mostrar el contenido 
+            document.getElementById('container').innerHTML = cadenaFinal;
+        }
+
+
+    </script>
+
+
+<style>
+    table,th,td {
+        width: 60%;
+        border : 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,td {
+        padding: 5px;
+    }
+</style>
 </head>
-<body>
+
+<body>    
+    <h2>Music XML collection</h2>
+
+    <div id='respuesta'></div>
+
+    <table id="container">
+        <!--Se carga la tabla-->
+    </table>
+
+    <!--Botón para lanzar la petición-->
+    <button type="button" onclick="lanzarPeticion()">Load collection</button>
+
+    <p>NOTA: El forma original de ajax es XML</p>
     
+
+
 </body>
+
 </html>

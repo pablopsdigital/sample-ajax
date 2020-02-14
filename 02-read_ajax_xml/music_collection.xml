@@ -1,28 +1,43 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<catalogo>
-    <cd>
-        <titulo>Hide your heart</titulo>
-        <artista>Bonnie Tyler</artista>
-        <pais>UK</pais>
-        <firma>CBS Records</firma>
-        <precio>9.90</precio>
-        <anio>1988</anio>
-    </cd>
-    <cd>
-        <titulo>Greatest Hits</titulo>
-        <artista>Dolly Parton</artista>
-        <pais>USA</pais>
-        <firma>RCA</firma>
-        <precio>9.90</precio>
-        <anio>1982</anio>
-    </cd>
-    <cd>
-        <titulo>Still got the blues</titulo>
-        <artista>Gary Moore</artista>
-        <pais>UK</pais>
-        <firma>Virgin records</firma>
-        <precio>10.20</precio>
-        <anio>1990</anio>
-    </cd>
-</catalogo>
+<?xml version="1.0" encoding="UTF-8"?>
+<CATALOG>
+   <CD>
+      <TITLE>Empire Burlesque</TITLE>
+      <ARTIST>Bob Dylan</ARTIST>
+      <COUNTRY>USA</COUNTRY>
+      <COMPANY>Columbia</COMPANY>
+      <PRICE>10.90</PRICE>
+      <YEAR>1985</YEAR>
+   </CD>
+   <CD>
+      <TITLE>Hide your heart</TITLE>
+      <ARTIST>Bonnie Tyler</ARTIST>
+      <COUNTRY>UK</COUNTRY>
+      <COMPANY>CBS Records</COMPANY>
+      <PRICE>9.90</PRICE>
+      <YEAR>1988</YEAR>
+   </CD>
+   <CD>
+      <TITLE>Greatest Hits</TITLE>
+      <ARTIST>Dolly Parton</ARTIST>
+      <COUNTRY>USA</COUNTRY>
+      <COMPANY>RCA</COMPANY>
+      <PRICE>9.90</PRICE>
+      <YEAR>1982</YEAR>
+   </CD>
+   <CD>
+      <TITLE>Still got the blues</TITLE>
+      <ARTIST>Gary Moore</ARTIST>
+      <COUNTRY>UK</COUNTRY>
+      <COMPANY>Virgin records</COMPANY>
+      <PRICE>10.20</PRICE>
+      <YEAR>1990</YEAR>
+   </CD>
+   <CD>
+      <TITLE>Eros</TITLE>
+      <ARTIST>Eros Ramazzotti</ARTIST>
+      <COUNTRY>EU</COUNTRY>
+      <COMPANY>BMG</COMPANY>
+      <PRICE>9.90</PRICE>
+      <YEAR>1997</YEAR>
+   </CD>
+</CATALOG>
