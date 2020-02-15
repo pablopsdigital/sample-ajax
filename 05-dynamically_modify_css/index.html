@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamically modify css</title>
+
+    <script type="text/javascript">
+
+        //Function refrech clock for each second
+        window.onload = function refrech() {
+            setTimeout('animationClock()', 1000);
+        }
+
+        //Function animation clock
+        function animationClock() {
+            var xmlhttp;
+
+            //Check old web navigator support
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            //Get time
+            var fetch_unix_timestamp = "";
+            fetch_unix_timestamp = function () {
+                return parseInt(new Date().getTime().toString().substring(0, 10));
+            }
+            var timestamp = fetch_unix_timestamp();
+
+            //Update clock
+            xmlhttp.onreadystatechange = function () {
+
+                if (xmlhttp.readyState == 4) {
+                    document.getElementById('clock').innerHTML = xmlhttp.responseText;
+                    setTimeout('animationClock()', 1000);
+                }
+            }
+
+            //Throw request
+            xmlhttp.open('GET', 'clock.php' + '?t=' + timestamp, true);
+            xmlhttp.send(null); //No data is sent, therefore null
+        }
+
+    </script>
+</head>
+
+<body>
+    <h2>Sample change css</h2>
+    <div id="clock">
+        <script type="text/javascript">refrech();</script>
+    </div>
+</body>
+
+</html>
