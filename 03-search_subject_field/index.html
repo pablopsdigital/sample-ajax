@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sample search subject field</title>
 
+    <script type="text/javascript">
+
+        //Function throw requets server
+        function subject(text) {
+
+            //Variable
+            var xmlhttp;
+
+            //Reset field
+            if (text.length === 0) {
+                document.getElementById('txtHint').innerHTML = "";
+                return;
+            }
+
+            //Navigator support
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+
+            //Check state
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    //Load response in html
+                    document.getElementById('txtHint').innerHTML = xmlhttp.responseText;
+                }
+            }
+
+            //Throw request to the server with parameters (true=Asynchronous)
+            xmlhttp.open('GET', "subjects.php?q=" + text, true);
+            xmlhttp.send();
+        }
+
+    </script>
+
 </head>
+
 <body>
 
     <h1>Search subject field</h1>
     <p>Insert a name in the field</p>
-    
-    <form action="">
-        First Name: <input type="text" id="txtname">
+
+    <form action="" method="get">
+        <!--Execute onkeyup the function with the form data-->
+        First Name: <input type="text" id="txtname" onkeyup="subject(this.value)">
     </form>
 
-    <h2>subject</h2>
-    
+    <p>Subjects: <span id='txtHint'></span></p>
+
 </body>
+
 </html>
