@@ -1,22 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test connection ajax database</title>
+
+    <script type="text/javascript">
+
+        //Function to show the data of a client 
+        function customerView(customerName) {
+
+            //Create connection ajax
+            var xmlhttp;
+
+            //Check content customerName
+            if (customerName == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+
+            //Check old web browsers support
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest(); //IE7, Firefox, Chrome, Opera, Safari
+            } else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //IE6, IE5
+            }
+
+
+            //If state is ok load response in html
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("customer").innerHTML = xmlhttp.responseText;
+                }
+            }
+
+            //Throw asynchronous request to server
+            xmlhttp.open('GET', 'database.php?customerName=' + customerName, true);
+            xmlhttp.send();
+
+        }
+    </script>
+
 </head>
+
 <body>
 
     <h2>Test connection ajax database</h2>
 
     <form action="">
-        <select name="customers">
+        <!--If state change method onchange call function customerView-->
+        <select name="customers" onchange="customerView(this.value)">
             <option value="">Select a customer</option>
-            <option value="">Option 1</option>
-            <option value="">Option 2</option>
-            <option value="">Option 3</option>
+            <option value="Mariette">Mariette</option>
+            <option value="Findlay">Findlay</option>
+            <option value="Ewan">Ewan</option>
         </select>
     </form>
-    
+    <br>
+    <div id="customer">Select a customer</div>
+
 </body>
+
 </html>
